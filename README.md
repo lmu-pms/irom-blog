@@ -40,4 +40,4 @@ Having trouble with Pages? Check out our [documentation](https://help.github.com
 -->
 ## Welcome to the Blog Page of Irom Project
 * Irom (Intelligent Recommendation of MOOCS)
-* http://irom.pms.ifi.lmu.de/
+* [Irom Project Home](http://irom.pms.ifi.lmu.de/)
