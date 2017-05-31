@@ -1,5 +1,5 @@
-A technical chronology of document-to-vector models
-===================================================
+A quick overview of document-to-vector models for intelligent vector space retrieval
+====================================================================================
 
 
 Introduction
@@ -35,7 +35,8 @@ The bag-of-words document encoding is based on a frequency distribution over the
 
 One very important improvement of this extremely high-dimensional representation is a weighting scheme called "tf-idf". In this case, "tf" refers to "term frequency" and "idf" refers to "inverse document frequency". The document frequency df(T) of a term is the number of documents in which the term T occurs (not the number of occurences!). This metric allows for the definiton of the idf weight factor as log(N/df(T)). The goal of the idf weight is to "punish" the frequency of terms which occur in every or most documents (and therefore carry no distinct information), and "elevate" the terms which only occur in one or a few documents.
 
-The effect of tf-idf is illustrated in figure XXX.
+The effect of tf-idf is illustrated in this figure:
+![tf-idf effect](Doc2Vec/tf-idf.png)
 
 The most important advantage of tf-idf is it's extreme effectivity compared to the relatively low effort required for it's implementation. The encoding behavior of course is almost purely syntactic, although the idf weight introduces a semantic weight.
 
@@ -44,9 +45,11 @@ One drawback of this approach is the extreme sparsity of the embedding space, wi
 LSA/I (Latent Semantic Analysis/Indexing)
 -----------------------------------------
 
-A popular method to reduce a vector space to it's basis spanning vectors is the application of Gaussian eleminiation, also called "row reduction". In order to be able to apply row reduction to a document space, first all document vectors are combined into a matrix, where each document vector is one column. LSA employs a slighly more sophisticated, fuzzy version of Gaussian elimination called "Singular Value Decomposition" (SVD).
+A popular method to reduce a vector space to it's basis spanning vectors is the application of Gaussian eleminiation, also called "row reduction". In order to be able to apply row reduction to a document space, first all document vectors are combined into a matrix, where each document vector is one column:
 
-This method was first introduced by Deerwester in 1990, and gained a lot of traction for its mathematically motivated approach to create a densely populated latent semantic space.
+![Sample document matrix](Doc2Vec/sparse-matrix.png)
+
+LSA employs a slighly more sophisticated, fuzzy version of Gaussian elimination called "Singular Value Decomposition" (SVD). This method was first introduced by Deerwester in 1990, and gained a lot of traction for its mathematically motivated approach to create a densely populated latent semantic space.
 
 The most important drawback of LSA is the extreme computational effort behind SVD. The computational complexity of this algorithm is O(n^2*k^3), where n is the number of documents plus the number of terms, and k is the number of embedded latent dimensions. This is especially unfortunate considering that any changes to n will trigger a reexecution of the SVD algorithm.
 
@@ -71,14 +74,20 @@ Word-Sentence-Paragraph-Document HAN (Hierarchical Attention Network)
 
 Following the impressive work that was done as part of the Word2Vec system, Mikolov's team turned their attention (pun not intended) to the embedding of sentences, paragraphs and documents. They delivered in 2014 with a paper titled "Distributed Representations of Sentences and Documents". 
 
-This was enabled by the slow rise of recurrent neural networks (RNN). Especially the Long-Short-Term-Memory (LSTM) and Gated Recurrent Unit (GRU) variants of RNN have gained enormous relevance. RNN are ideally suited to process chains of input data such as sequences of words, sentences and paragraphs. The underlying axiom of the Hierarchical Attention Network (HAN) is the idea, that every syntactic level is best encoded in its own embedding space. RNN are used to embed and encode each semantic level, and then produce a fixed-length summary vector via a so-called hidden "attention" layer. This recursive bottom-up process yields the document vector as its final root output.
+This was enabled by the slow rise of recurrent neural networks (RNN). Especially the Long-Short-Term-Memory (LSTM) and Gated Recurrent Unit (GRU) variants of RNN have gained enormous relevance. RNN are ideally suited to process chains of input data such as sequences of words, sentences and paragraphs. The underlying axiom of the Hierarchical Attention Network (HAN) is the idea, that every syntactic level is best encoded in its own embedding space. RNN are used to embed and encode each semantic level, and then produce a fixed-length summary vector via a so-called hidden "attention" layer. This recursive bottom-up process yields the document vector as its final root output:
+
+![Hierarchical Attention Network Architecture](https://richliao.github.io/images/HierachicalAttention.png)
+(Image from https://richliao.github.io/images/HierachicalAttention.png)
 
 HAN are very impressive in their ability to extract meaningful semantic dimensions, such as sentiment, from text documents. One drawback of HAN is their slightly complicated architecture, which makes them harder to implement and test.
 
 (Variational) Sequence-To-Sequence Autoencoder
 ----------------------------------------------
 
-Powerful stacked RNN encoder-decoder architectures being trained on even more powerful hardware have slowly started to rival HAN in the state-of-the-art spot for document embedding. RNN encoder-decoder models have mostly been researched in relation to Neural Machine Translation: An encoding RNN outputs a so-called "thought vector" as it's final state. This thought vector then serves as the initial input to a decoder RNN. Backpropagation of error is performed over the outputs over the decoder back into the encoder.
+Stacked RNN encoder-decoder architectures have slowly started to rival HAN in the state-of-the-art for document embedding. RNN encoder-decoder models have mostly been researched in relation to Neural Machine Translation: An encoding RNN outputs a so-called "thought vector" as it's final state. This thought vector then serves as the initial input to a decoder RNN. Backpropagation of error is performed over the outputs over the decoder back into the encoder.
+
+![Example for seq2seq network](https://camo.githubusercontent.com/242210d7d0151cae91107ee63bff364a860db5dd/687474703a2f2f6936342e74696e797069632e636f6d2f333031333674652e706e67)
+(Image from https://camo.githubusercontent.com)
 
 By setting Source Language = Target Language, these sequence encoder-decoder ("Seq2Seq") models become recurrent autoencoders. The "thought vector", which is the output of the encoder, does then serve as the embedded document representation. Compared to HAN, this technique is a little bit simpler to implement, but less reliable to train, especially for very long sequences.
 

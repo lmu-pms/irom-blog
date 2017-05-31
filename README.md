@@ -43,3 +43,4 @@ Having trouble with Pages? Check out our [documentation](https://help.github.com
 * [Project Irom (Home Page)](http://irom.pms.ifi.lmu.de/)
 * [Web technology information](posts/webTechInfo.md)
 * [Adding Piwik Analytics to an Angular2 app](posts/Angular2WithPiwik.md)
+* [A quick overview of document-to-vector models for intelligent vector space retrieval](posts/Doc2Vec.md)
