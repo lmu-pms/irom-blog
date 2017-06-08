@@ -9,19 +9,19 @@ The performance of a text retrieval system is highly dependent on the quality of
 
 There are four main properties to the latent semantic space that may be produced by an embedding algorithm:
 
-1. Online (incremental) improvement capability
+1 Online (incremental) improvement capability
 
 If the document corpus that is encoded by the embedding model changes frequently, it is important that you can gradually adapt your model to it. Especially for some of the more traditional semantic approaches, LSA in particular, the model is completely invalidated if the corpus changes, and therefore it coul not be improved upon incrementally.
 
-2. Capability to capture information from word order
+2 Capability to capture information from word order
 
 Some of the models assume that word order does not strongly influence the overarching semantics of a document. Intuitively though, grammar is obviously necessary for natural language understanding. Therefore, the models that ignore word order tend to capture only very superficial semantics, if any.
 
-3. Sparsity of the latent coordinates
+3 Sparsity of the latent coordinates
 
 A perfect semantic vector space would contain only those dimensions that are completely perpendicular to each other. Those dimensions are also called the "basis vectors" of the latent semantic space. If the space contains more dimensions than it has linearily independent basis vectors, the points in this space are going to be artificially "spread out". This problem usually expresses itself in a large amount of zero coordinates contained in the semantic vectors.
 
-4. Syntactic/Semantic character of latent dimensions
+4 Syntactic/Semantic character of latent dimensions
 
 Different search use-cases require different document representations. Two such use-cases that are highly divergent representation-wise are, for example, recommendation search and boolean retrieval. The latter use-case requires the representation to contain terms discretely and deterministically in order to be able to evaluate contains(document, term) boolean queries. On the other hand, recommendations are (mostly) not guided by explicit conditions, and require a deeper, abstract understanding of the document to be encoded by the latent dimensions.
 
