@@ -56,9 +56,9 @@ The most important drawback of LSA is the extreme computational effort behind SV
 LDA (Latent Dirichlet Allocation)
 ---------------------------------
 
-Dirichlet is synonym for topic. Latent Dirichlet (Topic) Allocation is an algorithm established by by David Blei, Andrew Ng, and Michael I. Jordan in 2003. It is essentially a probabalistic clustering method, which tries to associate terms T with dirichlets (topics) D by calculating the posterior probability \$$p(t|d)$$ for each t in T and d in D. The optimization goal is for each dirichlet to be as unique as possible in it's posterior term probabilities.
+Dirichlet is synonym for topic. Latent Dirichlet (Topic) Allocation is an algorithm established by by David Blei, Andrew Ng, and Michael I. Jordan in 2003. It is essentially a probabalistic clustering method, which tries to associate terms T with dirichlets (topics) D by calculating the posterior probability p(t\|d) for each t in T and d in D. The optimization goal is for each dirichlet to be as unique as possible in it's posterior term probabilities.
 
-The vector of posterior probabilities of a document Q to have a particular topic D, \$$p(Q|D)$$, can then be used to embed the document into a latent space. This space will be densely populated and encode reasonable semantic abstractions, such as DOG_related and CAT_related. However, due to the model's focus on words, the abstractions stay in the realm of "topics", which are superficial by nature. Non-topical characteristics, such as attitude or style of writing, which would be necessary for a truely insightful encoding, remain too subtle to be captured.
+The vector of posterior probabilities of a document Q to have a particular topic D, p(Q\|D), can then be used to embed the document into a latent space. This space will be densely populated and encode reasonable semantic abstractions, such as DOG_related and CAT_related. However, due to the model's focus on words, the abstractions stay in the realm of "topics", which are superficial by nature. Non-topical characteristics, such as attitude or style of writing, which would be necessary for a truely insightful encoding, remain too subtle to be captured.
 
 (TF-IDF weighted) Bag-Of-Embeddings
 -----------------------------------
