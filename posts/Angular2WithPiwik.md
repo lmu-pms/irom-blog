@@ -108,6 +108,9 @@ export class MyComponent {
 }
 ```
 
+Attention: To track full URLs if there is a hash (#), make sure to enable URL fragments tracking in Piwik under Settings -> Websites -> Settings -> Page URL fragments tracking.
+
+
 ## 3. Have fun with analytics!
 
 We're all set up now, every visit on one of our app pages is being registered by Piwik and shown on the analytics page. Of course there is much more we can track, the Angular2Piwik plugin provides all original Piwik tracking functions. 
